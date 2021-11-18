@@ -3,15 +3,16 @@ from typing import Dict
 
 from Resource import Resource
 
-class Gender(Enum):
-    male   = 1
-    female = 2
-
-class Status(Enum):
-    inactive = 0
-    active   = 1
 
 class User(Resource):
+    class Status(Enum):
+        inactive = 0
+        active   = 1
+    
+    class Gender(Enum):
+        male   = 1
+        female = 2
+
     _endpoint = '/users'
 
     def __init__(self, name : str, email : str, gender : Gender, status : Status, id = None) -> None:
@@ -27,8 +28,8 @@ class User(Resource):
         return User(id     = obj['id'], 
                     name   = obj['name'], 
                     email  = obj['email'], 
-                    gender = Gender[obj['gender']], 
-                    status = Status[obj['status']])
+                    gender = User.Gender[obj['gender']], 
+                    status = User.Status[obj['status']])
 
     def _to_data(self) -> dict:
         return {
