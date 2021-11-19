@@ -1,3 +1,4 @@
+from datetime import datetime, timedelta, timezone
 import toml
 
 from Api import Api
@@ -32,6 +33,13 @@ if __name__ == '__main__':
     print(post.id)
     api.delete(post)
     print(post.id)
+
+    todo = Todo(user.id, 'Testing', datetime.utcnow().replace(tzinfo=timezone.utc) + timedelta(hours = 2), Todo.Status.pending)
+    api.create(todo)
+    print(todo.due_on)
+    todo = api.fetch(Todo, todo.id)
+    print(todo.due_on)
+    api.delete(todo)
 
     print(user.id)
     api.cleanup()
