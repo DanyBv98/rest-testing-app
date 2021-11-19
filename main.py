@@ -1,46 +1,63 @@
-from datetime import datetime, timedelta, timezone
-import toml
+from typing import Dict, List
+import random
 
-from Api import Api
-from Comment import Comment
-from Todo import Todo
+from Resource import Resource
+from TomlResourceParser import TomlResourceParser
 
 from User import User
 from Post import Post
+from Todo import Todo
+from Comment import Comment
 
-if __name__ == '__main__':
+from Api import Api
+
+import toml
+
+def fill_orphans(orphans : List[Resource], parents : List[Resource], fill_map : Dict[str, str]):
+    for orphan in orphans:
+        parent = random.choice(parents)
+        for property in fill_map:
+            if not getattr(orphan, property):
+                setattr(orphan, property, getattr(parent, fill_map[property]))
+
+if __name__ == "__main__":
+    parser = TomlResourceParser({
+        "User"   : User,
+        "Post"   : Post,
+        "Todo"   : Todo,
+        "Comment": Comment
+    })
+
+    users    = parser.parse('data/users.toml'   )
+    posts    = parser.parse('data/posts.toml'   )
+    todos    = parser.parse('data/todos.toml'   )
+    comments = parser.parse('data/comments.toml')
+    
     with open('config.toml', 'r') as f:
         config = toml.load(f)
 
     api = Api(root = config['api']['root'], 
               access_token = config['api']['access_token'],
-              endpoints={User: '/users', Post: '/posts'})
+              endpoints={User: '/users', Post: '/posts', Comment: '/comments', Todo: '/todos'})
 
-    api.add_resource(Comment, '/comments')
-    api.add_resource(Todo, '/todos')
+    for u in users:
+        api.create(u)
+        print(u._to_data())
+        
+    fill_orphans(posts, users, {'user_id': 'id'})
+    for p in posts:
+        api.create(p)
+        print(p._to_data())
 
-    users = api.fetch(User)
+    fill_orphans(comments, posts, {'post_id': 'id'})
+    fill_orphans(comments, users, {'name': 'name', 'email': 'email'})
+    for c in comments:
+        api.create(c)
+        print(c._to_data())
 
-    todos = api.fetch(Todo)
-    comments = api.fetch(Comment)
+    fill_orphans(todos, users, {'user_id': 'id'})
+    for t in todos:
+        api.create(t)
+        print(t._to_data())
 
-    user = User('Test test', 'testingro@test.com', User.Gender.male, User.Status.active)
-    api.create(user)
-
-    post = Post(user.id, 'Test post', 'Lorem ipsum')
-    api.create(post)
-
-    print(post.id)
-    api.delete(post)
-    print(post.id)
-
-    todo = Todo(user.id, 'Testing', datetime.utcnow().replace(tzinfo=timezone.utc) + timedelta(hours = 2), Todo.Status.pending)
-    api.create(todo)
-    print(todo.due_on)
-    todo = api.fetch(Todo, todo.id)
-    print(todo.due_on)
-    api.delete(todo)
-
-    print(user.id)
     api.cleanup()
-    print(user.id)
