@@ -1,5 +1,5 @@
 from enum import Enum
-from typing import Dict
+from typing import Any, Dict, Optional
 
 from Resource import Resource
 
@@ -13,7 +13,7 @@ class User(Resource):
         male   = 1
         female = 2
 
-    def __init__(self, name : str, email : str, gender : Gender, status : Status, id = None) -> None:
+    def __init__(self, name : str, email : str, gender : Gender, status : Status, id : Optional[int] = None) -> None:
         super().__init__(id)
 
         self.name   = name
@@ -22,14 +22,14 @@ class User(Resource):
         self.status = status
 
     @staticmethod
-    def _from_dict(obj : Dict[str, object]) -> 'User':
+    def _from_dict(obj : Dict[str, Any]) -> 'User':
         return User(id     = obj['id'], 
                     name   = obj['name'], 
                     email  = obj['email'], 
                     gender = User.Gender[obj['gender']], 
                     status = User.Status[obj['status']])
 
-    def _to_data(self) -> dict:
+    def _to_data(self) -> Dict[str, Any]:
         return {
             'name'  : self.name,
             'email' : self.email,

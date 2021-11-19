@@ -38,9 +38,9 @@ class Api:
         self.root = root
         self.access_token = access_token
 
-        self.__endpoints = {}
-        self.__resources_pool = {}
-        self.__own_resources = []
+        self.__endpoints      : Dict[Type, str]                 = {}
+        self.__resources_pool : Dict[Type, Dict[int, Resource]] = {}
+        self.__own_resources  : List[Resource ]                 = []
 
         for r in endpoints:
             self.add_resource(r, endpoints[r])
@@ -69,9 +69,12 @@ class Api:
             response = requests.get(f'{self.root}{self.__endpoints[resource_type]}/{id}')
             if response.status_code == 404:
                 raise ApiResourceNotFoundError(resource_type, id)
-            if response.status_code == 200:
-                self.__resources_pool[resource_type][id] = resource_type._from_dict(response.json()['data'])
-                return self.__resources_pool[resource_type][id]
+            if response.status_code != 200:
+                raise ApiError(f'Unknown error occured. Got {response.status_code} when fetching data.')
+
+            self.__resources_pool[resource_type][id] = resource_type._from_dict(response.json()['data'])
+            return self.__resources_pool[resource_type][id]
+            
         else:
             response = requests.get(f'{self.root}{self.__endpoints[resource_type]}')
             if response.status_code != 200:
