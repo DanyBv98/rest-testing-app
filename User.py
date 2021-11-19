@@ -13,8 +13,6 @@ class User(Resource):
         male   = 1
         female = 2
 
-    _endpoint = '/users'
-
     def __init__(self, name : str, email : str, gender : Gender, status : Status, id = None) -> None:
         super().__init__(id)
 

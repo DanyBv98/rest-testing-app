@@ -11,8 +11,12 @@ if __name__ == '__main__':
     with open('config.toml', 'r') as f:
         config = toml.load(f)
 
-    api = Api(config['api']['root'], [User, Post, Comment, Todo], 
-            access_token = config['api']['access_token'])
+    api = Api(root = config['api']['root'], 
+              access_token = config['api']['access_token'],
+              endpoints={User: '/users', Post: '/posts'})
+
+    api.add_resource(Comment, '/comments')
+    api.add_resource(Todo, '/todos')
 
     users = api.fetch(User)
 

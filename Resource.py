@@ -2,8 +2,6 @@ from typing import Dict
 
 
 class Resource:
-    _endpoint = None
-
     def __init__(self, id : int) -> None:
         self.id = id
     

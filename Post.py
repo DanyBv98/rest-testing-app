@@ -2,8 +2,6 @@ from typing import Dict
 from Resource import Resource
 
 class Post(Resource):
-    _endpoint = '/posts'
-
     def __init__(self, user_id : int, title : str, body : str, id : int = None) -> None:
         super().__init__(id)
 

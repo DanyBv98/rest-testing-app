@@ -3,8 +3,6 @@ from typing import Dict
 from Resource import Resource
 
 class Todo(Resource):
-    _endpoint = '/todos'    
-    
     class Status(Enum):
         pending   = 0
         completed = 1

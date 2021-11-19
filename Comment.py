@@ -2,8 +2,6 @@ from typing import Dict
 from Resource import Resource
 
 class Comment(Resource):
-    _endpoint = '/comments'
-
     def __init__(self, post_id : int, name : str, email : str, body : str, id : int = None) -> None:
         super().__init__(id)
 
