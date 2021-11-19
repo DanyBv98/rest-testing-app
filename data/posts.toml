@@ -1,0 +1,45 @@
+resource = "Post"
+
+[[data]]
+title = "Paper vs screen"
+body = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum interdum efficitur tortor, dapibus convallis lorem bibendum at. Donec eget orci eget turpis lacinia molestie."
+
+[[data]]
+title = "The justice system"
+body = "Donec tincidunt malesuada arcu, et ornare justo dapibus et. Maecenas ac orci ac massa cursus vehicula vel a nisi. Proin vitae porttitor quam. "
+
+[[data]]
+title = "Network updates"
+body = "Vivamus eu dui turpis. Quisque vitae tellus nulla. Fusce sodales et lectus non venenatis. Aenean ac augue nibh."
+
+[[data]]
+title = "Constellations"
+body = "Vestibulum finibus pulvinar elit, ut sagittis ex tempor quis. Nam blandit hendrerit facilisis."
+
+[[data]]
+title = "The elements"
+body = "Sed rutrum ex et velit porta, quis elementum ipsum sagittis. Sed volutpat felis ut faucibus placerat."
+
+[[data]]
+title = "How to cook lava cake"
+body = "Aliquam egestas, odio sed condimentum molestie, lectus magna interdum quam, eu cursus nibh felis quis sem. Donec nec commodo velit."
+
+[[data]]
+title = "Internet speed in Europe"
+body = "Duis finibus blandit tincidunt. Fusce tristique erat orci, at commodo ex consectetur eu. Cras sed vulputate quam."
+
+[[data]]
+title = "Today's fashion"
+body = "Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Nunc elementum lacus condimentum porttitor eleifend."
+
+[[data]]
+title = "Endangered animals"
+body = "Sed lectus magna, dictum nec vulputate vel, posuere maximus enim. Integer faucibus a ante nec aliquet. Suspendisse potenti."
+
+[[data]]
+title = "Efficiency at work"
+body = "Donec efficitur, turpis at pulvinar rutrum, arcu est vulputate tellus, eu molestie risus mauris sit amet metus."
+
+[[data]]
+title = "The meaning of life"
+body = "Vivamus mi risus, tempor ut urna at, auctor sagittis mauris. In vitae velit odio. Aliquam rutrum turpis ac odio eleifend euismod."

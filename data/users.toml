@@ -1,0 +1,31 @@
+resource = "User"
+
+[[data]]
+name = "Wallace West"
+email = "wally.west@dcmail.com"
+gender = "male"
+status = "inactive"
+
+[[data]]
+name = "Bruce Wayne"
+email = "bruce@wayneeterprises.com"
+gender = "male"
+status = "active"
+
+[[data]]
+name = "Diana Prince"
+email = "diana@themyscira.com"
+gender = "female"
+status = "active"
+
+[[data]]
+name = "Harold Jordan"
+email = "hal.jordan@dcmail.com"
+gender = "male"
+status = "active"
+
+[[data]]
+name = "Barbara Gordon"
+email = "barbara.gordon@dcmail.com"
+gender = "female"
+status = "inactive"
