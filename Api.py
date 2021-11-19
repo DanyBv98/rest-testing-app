@@ -146,6 +146,6 @@ class Api:
         return success
     
     def cleanup(self) -> None:
-        for r in self.__own_resources:
+        for r in reversed(self.__own_resources):
             self.delete(r)
         self.__own_resources.clear()

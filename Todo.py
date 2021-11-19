@@ -22,7 +22,7 @@ class Todo(Resource):
         return Todo(id      = obj.get('id'), 
                     user_id = obj.get('user_id'), 
                     title   = obj.get('title'),
-                    due_on  = datetime.fromisoformat(obj['due_on']) if 'due_on' in obj else None,
+                    due_on  = Todo.__convert_datetime(obj['due_on']) if 'due_on' in obj else None,
                     status  = Todo.Status[obj['status']] if 'status' in obj else None)
 
     def _to_data(self) -> Dict[str, Any]:
@@ -32,3 +32,9 @@ class Todo(Resource):
             'due_on' : self.due_on.isoformat(timespec='milliseconds'),
             'status' : self.status.name
         }
+
+    @staticmethod
+    def __convert_datetime(dtime : datetime | str) -> datetime:
+        if isinstance(dtime, datetime): 
+            return dtime
+        return datetime.fromisoformat(dtime)
