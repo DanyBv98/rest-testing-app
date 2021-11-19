@@ -19,11 +19,11 @@ class Todo(Resource):
 
     @staticmethod
     def _from_dict(obj : Dict[str, Any]) -> 'Todo':
-        return Todo(id      = obj['id'], 
-                    user_id = obj['user_id'], 
-                    title   = obj['title'],
-                    due_on  = datetime.fromisoformat(obj['due_on']),
-                    status  = Todo.Status[obj['status']])
+        return Todo(id      = obj.get('id'), 
+                    user_id = obj.get('user_id'), 
+                    title   = obj.get('title'),
+                    due_on  = datetime.fromisoformat(obj['due_on']) if 'due_on' in obj else None,
+                    status  = Todo.Status[obj['status']] if 'status' in obj else None)
 
     def _to_data(self) -> Dict[str, Any]:
         return {

@@ -23,11 +23,11 @@ class User(Resource):
 
     @staticmethod
     def _from_dict(obj : Dict[str, Any]) -> 'User':
-        return User(id     = obj['id'], 
-                    name   = obj['name'], 
-                    email  = obj['email'], 
-                    gender = User.Gender[obj['gender']], 
-                    status = User.Status[obj['status']])
+        return User(id     = obj.get('id'), 
+                    name   = obj.get('name'), 
+                    email  = obj.get('email'), 
+                    gender = User.Gender[obj['gender']] if 'gender' in obj else None, 
+                    status = User.Status[obj['status']] if 'status' in obj else None)
 
     def _to_data(self) -> Dict[str, Any]:
         return {

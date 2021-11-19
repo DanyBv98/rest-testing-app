@@ -11,10 +11,10 @@ class Post(Resource):
 
     @staticmethod
     def _from_dict(obj : Dict[str, Any]) -> 'Post':
-        return Post(id      = obj['id'], 
-                    user_id = obj['user_id'], 
-                    title   = obj['title'],
-                    body    = obj['body'])
+        return Post(id      = obj.get('id'), 
+                    user_id = obj.get('user_id'), 
+                    title   = obj.get('title'),
+                    body    = obj.get('body'))
 
     def _to_data(self) -> Dict[str, Any]:
         return {
