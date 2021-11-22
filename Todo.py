@@ -9,6 +9,11 @@ class Todo(Resource):
         pending   = 0
         completed = 1
 
+    user_id : int
+    title : str
+    due_on : datetime
+    status : Status
+
     def __init__(self, user_id : int, title : str, due_on : datetime,  status : Status, id : Optional[int] = None) -> None:
         super().__init__(id)
 

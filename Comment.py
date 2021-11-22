@@ -2,6 +2,11 @@ from typing import Any, Dict, Optional
 from Resource import Resource
 
 class Comment(Resource):
+    post_id : int
+    name : str
+    email : str
+    body : str
+
     def __init__(self, post_id : int, name : str, email : str, body : str, id : Optional[int] = None) -> None:
         super().__init__(id)
 
