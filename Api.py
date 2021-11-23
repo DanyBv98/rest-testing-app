@@ -1,4 +1,4 @@
-from typing import Dict, List, Type
+from typing import Callable, Dict, List, Type
 
 from Resource import Resource
 import requests
@@ -95,7 +95,7 @@ class Api:
         else:
             return self.fetch(resource_type, id)
 
-    def create(self, resource : Resource, create_children : bool = True) -> bool:
+    def create(self, resource : Resource, create_children : bool = True, callback : Callable[[Resource, bool], None] = None) -> bool:
         self.__check_access_token()
         self.__check_resource_type(type(resource))
 
@@ -118,6 +118,9 @@ class Api:
             resource.id = response_data['id']
             self.__resources_pool[type(resource)][resource.id] = resource
             self.__own_resources.append(resource)
+            
+            if callback:
+                callback(resource, success)
         
             metadatas = resource._get_resource_metadatas()
             for (member, metadata) in metadatas.items():
@@ -128,8 +131,9 @@ class Api:
                     for child in children:
                         for map in metadata.mapping:
                             setattr(child, map, response_data[metadata.mapping[map]])
-                        self.create(child, create_children=create_children)
-
+                            
+                        if create_children:
+                            self.create(child, create_children=create_children, callback=callback)
         return success
 
     def delete(self, resource : Resource) -> bool:

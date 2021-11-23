@@ -40,24 +40,20 @@ class Resource:
             if typing.get_origin(type_hint) == Annotated:
                 type_args = typing.get_args(type_hint)
                 
-                metadata_annotation = None
                 for arg in type_args[1:]:
                     if isinstance(arg, ResourceRelationshipAnnotation):
                         metadata_annotation = arg
+                        is_many = typing.get_origin(type_args[0]) == list
+                        child_type = type_args[0] if not is_many else typing.get_args(type_args[0])[0]
+                        metadatas[member] = ResourceRelationshipMetadata(member, child_type, metadata_annotation.mapping, metadata_annotation.is_child, is_many)
                         break
-
-                if metadata_annotation:
-                    is_many = typing.get_origin(type_args[0]) == list
-                    child_type = type_args[0] if not is_many else typing.get_args(type_args[0])[0]
-
-                    metadatas[member] = ResourceRelationshipMetadata(member, child_type, metadata_annotation.mapping, metadata_annotation.is_child, is_many)
+        
         return metadatas
     
     def _children_from_dict(resource : 'Resource', obj : Dict[str, Any]) -> None:
         metadatas : Dict[str, ResourceRelationshipMetadata] = resource._get_resource_metadatas()
         for (member, metadata) in metadatas.items():
             if member in obj:
-                data = obj[member]
                 if isinstance(obj[member], dict):
                     resources = [metadata.resource_type._from_dict(resource_obj) for (name, resource_obj) in obj[member].items()]
                     setattr(resource, member, resources)
