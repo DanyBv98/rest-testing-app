@@ -1,4 +1,4 @@
-from typing import Dict, List, Type
+from typing import Callable, Dict, List, Type
 
 from Resource import Resource
 import requests
@@ -95,7 +95,7 @@ class Api:
         else:
             return self.fetch(resource_type, id)
 
-    def create(self, resource : Resource) -> bool:
+    def create(self, resource : Resource, create_children : bool = True, callback : Callable[[Resource, bool], None] = None) -> bool:
         self.__check_access_token()
         self.__check_resource_type(type(resource))
 
@@ -103,7 +103,6 @@ class Api:
         
         if resource.id != None:
             raise ApiResourceIdNotEmptyError('A resource object that needs to be created cannot have an id.')
-
         response = requests.post(f'{self.root}{self.__endpoints[type(resource)]}', resource._to_data(), headers=headers)
         resp_json = response.json()
 
@@ -115,10 +114,26 @@ class Api:
         
         success = response.status_code == 201
         if success:
-            resource.id = resp_json['data']['id']
+            response_data = resp_json['data']
+            resource.id = response_data['id']
             self.__resources_pool[type(resource)][resource.id] = resource
             self.__own_resources.append(resource)
-
+            
+            if callback:
+                callback(resource, success)
+        
+            metadatas = resource._get_resource_metadatas()
+            for (member, metadata) in metadatas.items():
+                if metadata.is_child == True:
+                    member_data = getattr(resource, member)
+                    children = member_data if metadata.is_many else [member_data]
+                    
+                    for child in children:
+                        for map in metadata.mapping:
+                            setattr(child, map, response_data[metadata.mapping[map]])
+                            
+                        if create_children:
+                            self.create(child, create_children=create_children, callback=callback)
         return success
 
     def delete(self, resource : Resource) -> bool:
@@ -146,6 +161,6 @@ class Api:
         return success
     
     def cleanup(self) -> None:
-        for r in self.__own_resources:
+        for r in reversed(self.__own_resources):
             self.delete(r)
         self.__own_resources.clear()
