@@ -1,0 +1,16 @@
+[_metadata]
+    [_metadata.resources]
+        users = 'User'
+[data]
+    [data.users.user1]
+        name = 'Wallace West'
+        email = 'wally.west@dcmail.com'
+        gender = 'male'
+        status = 'inactive'
+        
+        [data.users.user1.posts]
+            [data.users.user1.posts.post1]
+                body = 'Aliquam egestas, odio sed condimentum molestie, lectus magna interdum quam, eu cursus nibh felis quis sem. Donec nec commodo velit.'
+
+            [data.users.user1.posts.post2]
+                title = 'Paper vs screen'

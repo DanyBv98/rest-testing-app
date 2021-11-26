@@ -38,12 +38,21 @@ def parser():
 
 @pytest.fixture
 def data_folder():
-    return "data"
+    return "test_data"
 
 @pytest.fixture()
 def parser_objs(data_folder, parser, test_group, test_toml):
     return parser.parse(f'{data_folder}/{test_group}/{test_toml}')
 
 @pytest.fixture()
-def users(data_folder, parser_objs):
+def users(parser_objs):
     return parser_objs[User]
+@pytest.fixture()
+def posts(parser_objs):
+    return parser_objs[Post]
+@pytest.fixture()
+def comments(parser_objs):
+    return parser_objs[Comment]
+@pytest.fixture()
+def todos(parser_objs):
+    return parser_objs[Todo]

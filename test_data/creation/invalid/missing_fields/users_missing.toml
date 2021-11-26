@@ -1,0 +1,15 @@
+[_metadata]
+    [_metadata.resources]
+        users = 'User'
+[data]
+    [data.users.user1]
+        name = ''
+        email = 'wally.west@dcmail.com'
+        gender = 'male'
+        status = 'inactive'
+    
+    [data.users.user2]
+        name = 'Bruce Wayne'
+        email = ''
+        gender = 'male'
+        status = 'active'

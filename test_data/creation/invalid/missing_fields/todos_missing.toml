@@ -1,0 +1,16 @@
+[_metadata]
+    [_metadata.resources]
+        users = 'User'
+[data]
+    [data.users.user1]
+        name = 'Wallace West'
+        email = 'wally.west@dcmail.com'
+        gender = 'male'
+        status = 'inactive'
+
+        [data.users.user1.todos]        
+            [data.users.user1.todos.todo1]
+                title = ''
+                due_on = 2021-12-01T18:30:00.000+05:30
+                status = 'pending'
+                

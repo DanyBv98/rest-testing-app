@@ -1,0 +1,13 @@
+[_metadata]
+    [_metadata.resources]
+        posts = 'Post'
+[data]
+    [data.posts]
+        [data.posts.post1]
+        title = 'Paper vs screen'
+        body = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum interdum efficitur tortor, dapibus convallis lorem bibendum at. Donec eget orci eget turpis lacinia molestie.'
+
+        [data.posts.post2]
+        user_id = 123456789
+        title = 'The justice system'
+        body = 'Donec tincidunt malesuada arcu, et ornare justo dapibus et. Maecenas ac orci ac massa cursus vehicula vel a nisi. Proin vitae porttitor quam. '

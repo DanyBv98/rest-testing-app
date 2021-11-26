@@ -1,0 +1,15 @@
+[_metadata]
+    [_metadata.resources]
+        comments = 'Comment'
+[data]
+    [data.comments]
+        [data.comments.comment1]
+            name = 'Bruce Wayne'
+            email = 'bruce@wayneenterprises.com'
+            body = 'Nice work on the article.'
+
+        [data.comments.comment2]
+            post_id = 123456789
+            name = 'Diana Prince'
+            email = 'diana@themyscira.com'
+            body = 'This does not seem to be true.'

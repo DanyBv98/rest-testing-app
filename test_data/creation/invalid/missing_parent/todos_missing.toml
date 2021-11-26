@@ -1,0 +1,15 @@
+[_metadata]
+    [_metadata.resources]
+        todos = 'Todo'
+[data]
+    [data.todos]
+        [data.todos.todo1]
+            title = 'Buy some milk'
+            due_on = 2021-12-01T18:30:00.000+05:30
+            status = 'pending'
+
+        [data.todos.todo2]
+            user_id = 1233456789
+            title = 'Walk the dog'
+            due_on = 2021-11-19T20:00:00.000+03:00
+            status = 'completed'

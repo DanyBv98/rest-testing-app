@@ -1,0 +1,35 @@
+[_metadata]
+    [_metadata.resources]
+        users = 'User'
+[data]
+    [data.users.user1]
+        name = 'Wallace West'
+        email = 'wally.west@dcmail.com'
+        gender = 'male'
+        status = 'inactive'
+
+        [data.users.user1.posts]
+            [data.users.user1.posts.post1]
+                title = 'How to cook lava cake'
+                body = 'Aliquam egestas, odio sed condimentum molestie, lectus magna interdum quam, eu cursus nibh felis quis sem. Donec nec commodo velit.'
+                
+                [data.users.user1.posts.post1.comments]
+                    [data.users.user1.posts.post1.comments.comment1]
+                    name = ''
+                    email = 'diana@themyscira.com'
+                    body = 'Thanks for the recipe. Really tasty.'
+
+            [data.users.user1.posts.post2]
+                title = 'Paper vs screen'
+                body = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum interdum efficitur tortor, dapibus convallis lorem bibendum at. Donec eget orci eget turpis lacinia molestie.'
+                
+                [data.users.user1.posts.post2.comments]
+                    [data.users.user1.posts.post2.comments.comment1]
+                    name = 'Barbara Gordon'
+                    email = ''
+                    body = 'I prefer paper 100%'
+                    
+                    [data.users.user1.posts.post2.comments.comment2]
+                    name = 'Diana Prince'
+                    email = 'diana@themyscira.com'
+                    body = ''

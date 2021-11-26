@@ -12,7 +12,7 @@ class TestAdding:
             assert resource.id != None
 
     @pytest.mark.parametrize('test_group,test_toml', [
-        ('creation_tests', 'user_creation.toml')
+        ('creation/valid', 'user_creation.toml')
     ])
     def test_user_add(self, api, users):
         for user in users:
@@ -21,7 +21,7 @@ class TestAdding:
     
     
     @pytest.mark.parametrize('test_group,test_toml', [
-        ('creation_tests', 'post_creation.toml')
+        ('creation/valid', 'post_creation.toml')
     ])
     def test_post_add(self, api, users):
         for user in users:
@@ -30,7 +30,7 @@ class TestAdding:
     
 
     @pytest.mark.parametrize('test_group,test_toml', [
-        ('creation_tests', 'comment_creation.toml')
+        ('creation/valid', 'comment_creation.toml')
     ])
     def test_comment_add(self, api, users):
         for user in users:
@@ -38,7 +38,7 @@ class TestAdding:
                 TestAdding.__assert_creation(Comment, resource, success))
 
     @pytest.mark.parametrize('test_group,test_toml', [
-        ('creation_tests', 'todo_creation.toml')
+        ('creation/valid', 'todo_creation.toml')
     ])
     def test_todo_add(self, api, users):
         for user in users:
