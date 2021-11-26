@@ -1,0 +1,52 @@
+[_metadata]
+    [_metadata.resources]
+        users = 'User'
+[data]
+    [data.users.user1]
+        name = 'Wallace West'
+        email = 'wally.west@dcmail.com'
+        gender = 'male'
+        status = 'inactive'
+
+        [data.users.user1.posts]
+            [data.users.user1.posts.post1]
+                title = 'How to cook lava cake'
+                body = 'Aliquam egestas, odio sed condimentum molestie, lectus magna interdum quam, eu cursus nibh felis quis sem. Donec nec commodo velit.'
+                
+                [data.users.user1.posts.post1.comments]
+                    [data.users.user1.posts.post1.comments.comment1]
+                    name = 'Diana Prince'
+                    email = 'diana@themyscira.com'
+                    body = 'Thanks for the recipe. Really tasty.'
+
+            [data.users.user1.posts.post2]
+                title = 'Paper vs screen'
+                body = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum interdum efficitur tortor, dapibus convallis lorem bibendum at. Donec eget orci eget turpis lacinia molestie.'
+                
+                [data.users.user1.posts.post2.comments]
+                    [data.users.user1.posts.post2.comments.comment1]
+                    name = 'Barbara Gordon'
+                    email = 'barbara.gordon@dcmail.com'
+                    body = 'I prefer paper 100%'
+                    
+                    [data.users.user1.posts.post2.comments.comment2]
+                    name = 'Diana Prince'
+                    email = 'diana@themyscira.com'
+                    body = 'This does not seem to be true.'
+
+    [data.users.user2]
+        name = 'Bruce Wayne'
+        email = 'bruce@wayneenterprises.com'
+        gender = 'male'
+        status = 'active'
+        
+        [data.users.user2.posts]
+            [data.users.user2.posts.post1]
+                title = 'The justice system'
+                body = 'Donec tincidunt malesuada arcu, et ornare justo dapibus et. Maecenas ac orci ac massa cursus vehicula vel a nisi. Proin vitae porttitor quam. '
+
+                [data.users.user2.posts.post1.comments]
+                    [data.users.user2.posts.post1.comments.comment1]
+                    name = 'Wallace West'
+                    email = 'wally.west@dcmail.com'
+                    body = 'You don not know what you are talking about...'

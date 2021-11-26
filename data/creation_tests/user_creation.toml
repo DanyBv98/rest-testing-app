@@ -1,0 +1,21 @@
+[_metadata]
+    [_metadata.resources]
+        users = 'User'
+[data]
+    [data.users.user1]
+        name = 'Wallace West'
+        email = 'wally.west@dcmail.com'
+        gender = 'male'
+        status = 'inactive'
+    
+    [data.users.user2]
+        name = 'Bruce Wayne'
+        email = 'bruce@wayneenterprises.com'
+        gender = 'male'
+        status = 'active'
+    
+    [data.users.user3]
+        name = 'Diana Prince'
+        email = 'diana@themyscira.com'
+        gender = 'female'
+        status = 'active'
