@@ -1,0 +1,51 @@
+[_metadata]
+    [_metadata.resources]
+        users = 'User'
+        posts = 'Post'
+        comments = 'Comment'
+        todo = 'Todo'
+[data]
+    [data.users]
+        [data.users.user1]
+            name = 'Wallace West'
+            email = 'wally.west@dcmail.com'
+            gender = 'male'
+            status = 'inactive'
+            [data.users.user1.posts]
+                [data.users.user1.posts.post1]
+                    title = 'Efficiency at work'
+                    body = 'Donec efficitur, turpis at pulvinar rutrum, arcu est vulputate tellus, eu molestie risus mauris sit amet metus.'
+                    
+                    [data.users.user1.posts.post1.comments]
+                        [data.users.user1.posts.post1.comments.comment1]
+                        name = 'Harold Jordan'
+                        email = 'hal.jordan@dcmail.com'
+                        body = 'Nice work on the article.'
+
+                        [data.users.user1.posts.post1.comments.comment2]
+                        name = 'Bruce Wayne'
+                        email = 'bruce@wayneenterprises.com'
+                        body = 'You do not know what you are talking about...'
+
+
+                [data.users.user1.posts.post2]
+                title = 'The justice system'
+                body = 'Donec tincidunt malesuada arcu, et ornare justo dapibus et. Maecenas ac orci ac massa cursus vehicula vel a nisi. Proin vitae porttitor quam.'
+
+
+                [data.users.user1.todos.todo1]
+                title = 'Buy some milk'
+                due_on = 2021-12-01T18:30:00.000+05:30
+                status = 'pending'
+
+                [data.users.user1.todos.todo2]
+                title = 'Cook dinner'
+                due_on = 2021-11-12T21:00:00.000+06:00
+                status = 'completed'
+
+
+        [data.users.user2]
+        name = 'Bruce Wayne'
+        email = 'bruce@wayneenterprises.com'
+        gender = 'male'
+        status = 'active'

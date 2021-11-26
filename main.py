@@ -17,7 +17,7 @@ if __name__ == '__main__':
         "Comment": Comment
     })
 
-    resources = parser.parse('data/nested.toml')
+    resources = parser.parse('test_data/nested/nested.toml')
 
     with open('config.toml', 'r') as f:
         config = toml.load(f)

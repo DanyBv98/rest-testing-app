@@ -136,20 +136,22 @@ class Api:
                             self.create(child, create_children=create_children, callback=callback)
         return success
 
-    def delete(self, resource : Resource) -> bool:
-        self.__check_access_token()
+    def delete(self, resource : Resource, weak : bool = False) -> bool:
         self.__check_resource_type(type(resource))
 
-        headers = {'Authorization': f'Bearer {self.access_token}'}
+        if not weak:
+            self.__check_access_token()
 
-        response = requests.delete(f'{self.root}{self.__endpoints[type(resource)]}/{resource.id}', headers=headers)
+            headers = {'Authorization': f'Bearer {self.access_token}'}
+
+            response = requests.delete(f'{self.root}{self.__endpoints[type(resource)]}/{resource.id}', headers=headers)
+            
+            if response.status_code == 401:
+                raise ApiInvalidAccessTokenError('Unauthorized to run DELETE requests')
+            if response.status_code == 404:
+                raise ApiResourceNotFoundError(type(resource), resource.id)
         
-        if response.status_code == 401:
-            raise ApiInvalidAccessTokenError('Unauthorized to run DELETE requests')
-        if response.status_code == 404:
-            raise ApiResourceNotFoundError(type(resource), resource.id)
-        
-        success = response.status_code == 204
+        success = True if weak else response.status_code == 204
         if success:
             if resource.id in self.__resources_pool[type(resource)]:
                 del self.__resources_pool[type(resource)][resource.id]
@@ -158,6 +160,15 @@ class Api:
             if resource in self.__own_resources:
                 self.__own_resources.remove(resource)
 
+            metadatas = resource._get_resource_metadatas()
+            for (member, metadata) in metadatas.items():
+                if metadata.is_child == True:
+                    member_data = getattr(resource, member)
+                    children = member_data if metadata.is_many else [member_data]
+                    
+                    for child in children:
+                        self.delete(child, weak=True)
+                        
         return success
     
     def cleanup(self) -> None:
